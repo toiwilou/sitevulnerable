@@ -1,0 +1,35 @@
+0. Prérequis :
+
+	Créez un dossier demo avec la commande : sudo mkdir /var/www/html/demo
+	Placez tous les fichiers de l'archive sitevulnerable.zip dans le dossier /var/www/html/demo (vous pouvez d'abord les extraire sur le Bureau), puis taper la commande "sudo mv /home/kali/Desktop/admin/ /home/kali/Desktop/assets/ /home/kali/Desktop/images /home/kali/Desktop/article.php /home/kali/Desktop/galerie.php /home/kali/Desktop/index.php /home/kali/Desktop/demobdd.sql /var/www/html/demo/"
+	
+	Donnez les droits au répertoire demo :
+	sudo chmod -R 755 /var/www/html/demo
+        sudo chown -R www-data:www-data /var/www/html/demo
+
+
+1. Lancement de apache2 et mysql :
+
+ 	sudo service apache2 start
+        sudo service mysql start
+	sudo mysql
+
+
+2. Création de la base de données une fois mysql lancé:
+
+	CREATE DATABASE demobdd;
+	USE demobdd;
+	source /var/www/html/demo/demobdd.sql;
+
+	Si besoin de supprimer et de recréer la base de données :
+	DROP DATABASE demobdd;
+	DROP USER 'demoutilisateur'@'localhost'; (puis recréer la base de données)
+
+	Si besoin, supprimez tous les fichiers sources existants également :
+	sudo rm -rf /var/www/html/demo/*
+
+
+3. Si erreur de connexion Mysql :
+	
+	Vérifier le mot de passe SQL de demoutilisateur, par défaut "Mdp@Ass3zSécuris3"
+	Il est présent (et à modifier éventuellement) dans demobdd.sql et presque tous les fichiers .php
